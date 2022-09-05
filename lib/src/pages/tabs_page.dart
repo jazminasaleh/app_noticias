@@ -1,4 +1,6 @@
 import 'package:flutter/material.dart';
+import 'package:noticias/src/pages/tab1_page.dart';
+import 'package:noticias/src/services/news_service.dart';
 import 'package:provider/provider.dart';
 import 'package:provider/provider.dart';
 
@@ -44,9 +46,7 @@ class _Paginas extends StatelessWidget {
       //prohibe que se deslice de una pagina a otra
       physics: NeverScrollableScrollPhysics(),
       children: <Widget>[
-        Container(
-          color: Colors.red,
-        ),
+       Tab1Page(),
         Container(
           color: Colors.green,
         ),
