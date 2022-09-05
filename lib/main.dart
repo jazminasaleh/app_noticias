@@ -1,4 +1,6 @@
 import 'package:flutter/material.dart';
+import 'package:noticias/src/pages/tabs_page.dart';
+import 'package:noticias/src/theme/tema.dart';
 
 void main() => runApp(MyApp());
 
@@ -7,16 +9,9 @@ class MyApp extends StatelessWidget {
   Widget build(BuildContext context) {
     return MaterialApp(
       title: 'Material App',
-      home: Scaffold(
-        appBar: AppBar(
-          title: Text('Material App Bar'),
-        ),
-        body: Center(
-          child: Container(
-            child: Text('Hello World'),
-          ),
-        ),
-      ),
+      theme: miTema,
+      debugShowCheckedModeBanner: false,
+      home: TabsPage()
     );
   }
 }
