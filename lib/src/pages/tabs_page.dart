@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:noticias/src/pages/tab1_page.dart';
+import 'package:noticias/src/pages/tab2_page.dart';
 import 'package:noticias/src/services/news_service.dart';
 import 'package:provider/provider.dart';
 import 'package:provider/provider.dart';
@@ -26,7 +27,11 @@ class _Navegacion extends StatelessWidget {
       //escucha el valor de la pagina actual
       currentIndex: navegacionModel.paginaActual,
       //aca se cambia el valor de la pagina actual
-      onTap: (i) => navegacionModel.paginaActual = i,
+      onTap: (i) {
+        navegacionModel.paginaActual = i;
+        final newsServices = Provider.of<NewsService>(context, listen: false);
+        newsServices.selectedCategory = newsServices.selectedcategory;
+      },
       items: const [
         BottomNavigationBarItem(
             icon: Icon(Icons.person_outline), label: 'persona'),
@@ -45,12 +50,7 @@ class _Paginas extends StatelessWidget {
       scrollDirection: Axis.horizontal,
       //prohibe que se deslice de una pagina a otra
       physics: NeverScrollableScrollPhysics(),
-      children: <Widget>[
-       Tab1Page(),
-        Container(
-          color: Colors.green,
-        ),
-      ],
+      children: <Widget>[Tab1Page(), Tab2Page()],
     );
   }
 }
