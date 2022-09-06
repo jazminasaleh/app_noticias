@@ -5,11 +5,14 @@ import 'package:noticias/src/services/news_service.dart';
 import 'package:provider/provider.dart';
 import 'package:provider/provider.dart';
 
+//Parte de la navegacion 
+//Los botones de la parte inferiuor
+//el cambio de pagina 1 a 2 y de 2 a 1
 class TabsPage extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return ChangeNotifierProvider(
-      create: (_) => _NavegacionModel(),
+      create: (_) => new _NavegacionModel(),
       child: Scaffold(
         body: _Paginas(),
         bottomNavigationBar: _Navegacion(),
@@ -18,6 +21,7 @@ class TabsPage extends StatelessWidget {
   }
 }
 
+//La parte inferior de los botones de la navegacion
 class _Navegacion extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
@@ -34,13 +38,14 @@ class _Navegacion extends StatelessWidget {
       },
       items: const [
         BottomNavigationBarItem(
-            icon: Icon(Icons.person_outline), label: 'persona'),
-        BottomNavigationBarItem(icon: Icon(Icons.public), label: 'Encabezado')
+            icon: Icon(Icons.newspaper), label: 'Noticias'),
+        BottomNavigationBarItem(icon: Icon(Icons.public), label: 'Categoria')
       ],
     );
   }
 }
 
+//lo que va a aparecer en el body de la app
 class _Paginas extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
@@ -50,7 +55,11 @@ class _Paginas extends StatelessWidget {
       scrollDirection: Axis.horizontal,
       //prohibe que se deslice de una pagina a otra
       physics: NeverScrollableScrollPhysics(),
-      children: <Widget>[Tab1Page(), Tab2Page()],
+      //la pagina 1 y dos de la app
+      children: <Widget>[
+        Tab1Page(),
+        Tab2Page()
+      ],
     );
   }
 }
@@ -61,7 +70,7 @@ class _NavegacionModel with ChangeNotifier {
   PageController _pageController = new PageController(initialPage: 0);
 
   int get paginaActual => this._paginaActual;
-
+  //se cambia la pagina actual
   set paginaActual(int valor) {
     this._paginaActual = valor;
     _pageController.animateToPage(valor,

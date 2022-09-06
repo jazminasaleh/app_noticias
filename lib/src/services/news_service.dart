@@ -10,7 +10,7 @@ final _APIKEY = '930d495fd765413f9ef195e94d1324a8';
 class NewsService with ChangeNotifier {
   List<Article> headlines = [];
   String _selectedCategory = 'business';
-   bool _isLoading = true;
+  bool _isLoading = true;
   List<Category> categories = [
     Category(FontAwesomeIcons.building, 'business'),
     Category(FontAwesomeIcons.tv, 'entertainment'),
@@ -32,7 +32,6 @@ class NewsService with ChangeNotifier {
   }
 
   bool get isLoading => this._isLoading;
-
 
   get selectedcategory => this._selectedCategory;
 
@@ -61,8 +60,8 @@ class NewsService with ChangeNotifier {
 
   getArticulesByCategory(String category) async {
     if (this.categoryArticles[category]!.length > 0) {
-       this._isLoading = false;
-        notifyListeners();
+      this._isLoading = false;
+      notifyListeners();
       return this.categoryArticles[category];
     }
     final url = Uri.parse(

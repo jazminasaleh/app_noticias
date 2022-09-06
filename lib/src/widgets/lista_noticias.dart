@@ -29,22 +29,30 @@ class _Noticia extends StatelessWidget {
   Widget build(BuildContext context) {
     return Column(
       children: [
-        _TarjetaTopBar(
-          noticia: this.noticia,
-          index: this.index,
+        SizedBox(
+          height: 20,
         ),
         _TarjetaTitulo(noticia: noticia),
         _TarjetaImagen(noticia: noticia),
         _TarjetaBody(noticia: noticia),
+        SizedBox(
+          height: 4,
+        ),
+        _TarjetaTopBar(
+          noticia: this.noticia,
+          index: this.index,
+        ),
         _TarjetaBotones(),
-        SizedBox(height: 10,),
+        SizedBox(
+          height: 5,
+        ),
         Divider(),
       ],
     );
   }
 }
 
-class  _TarjetaBotones extends StatelessWidget {
+class _TarjetaBotones extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Container(
@@ -52,17 +60,21 @@ class  _TarjetaBotones extends StatelessWidget {
         mainAxisAlignment: MainAxisAlignment.center,
         children: [
           RawMaterialButton(
-            onPressed: (){},
+            onPressed: () {},
             fillColor: miTema.accentColor,
-            shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(20),
+            shape: RoundedRectangleBorder(
+              borderRadius: BorderRadius.circular(20),
             ),
             child: Icon(Icons.star_border),
           ),
-          SizedBox(width: 10,),
-           RawMaterialButton(
-            onPressed: (){},
+          SizedBox(
+            width: 10,
+          ),
+          RawMaterialButton(
+            onPressed: () {},
             fillColor: Colors.blue,
-            shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(20),
+            shape: RoundedRectangleBorder(
+              borderRadius: BorderRadius.circular(20),
             ),
             child: Icon(Icons.more),
           ),
@@ -72,14 +84,14 @@ class  _TarjetaBotones extends StatelessWidget {
   }
 }
 
-class  _TarjetaBody extends StatelessWidget {
+class _TarjetaBody extends StatelessWidget {
   final Article noticia;
-  const  _TarjetaBody({required this.noticia});
+  const _TarjetaBody({required this.noticia});
 
   @override
   Widget build(BuildContext context) {
     return Container(
-      child: Text(noticia.description!),
+      child: Text(noticia.description ?? ''),
     );
   }
 }
@@ -91,18 +103,19 @@ class _TarjetaImagen extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Container(
-      margin: EdgeInsets.symmetric(vertical: 10),
-      child: ClipRRect(
-        borderRadius: BorderRadius.only(topLeft: Radius.circular(50), bottomRight: Radius.circular(50)),
-        child: Container(
-          child: (noticia.urlToImage != null)
-            ?FadeInImage(
-              image: NetworkImage(noticia.urlToImage!),
-              placeholder:AssetImage('assets/giphy.gif') ,)
-            :Image(image: AssetImage('assets/no-img.png')) 
-        ),
-      ),
-    );
+        margin: EdgeInsets.symmetric(vertical: 10),
+        child: ClipRRect(
+          borderRadius: BorderRadius.only(
+              topLeft: Radius.circular(50), bottomRight: Radius.circular(50)),
+          child: Container(
+            child: (noticia.urlToImage != null)
+                ? FadeInImage(
+                    placeholder: AssetImage('assets/giphy.gif'),
+                    image: NetworkImage(noticia.urlToImage!))
+                : Image(
+                    image: AssetImage('assets/no-image.png'),),
+          ),
+        ));
   }
 }
 
@@ -135,14 +148,10 @@ class _TarjetaTopBar extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Container(
-      padding: EdgeInsets.symmetric(horizontal: 10),
       margin: EdgeInsets.only(bottom: 10),
       child: Row(
         children: [
-          Text(
-            '${index + 1}.',
-            style: TextStyle(color: miTema.accentColor),
-          ),
+          Text('Fuente: '),
           Text(
             '${noticia.source.name}.',
           )
