@@ -15,7 +15,7 @@ class _Tab1PageState extends State<Tab1Page> with AutomaticKeepAliveClientMixin{
     return Scaffold(
       appBar: AppBar(
         backgroundColor: Colors.white,
-        title: Text('       Noticias Generales de Colombia ', style: TextStyle(color: Color.fromARGB(255, 12, 2, 53), fontWeight: FontWeight.bold),),
+        title: Text('       Noticias Generales de Colombia ', style: TextStyle(color: Color.fromARGB(255, 12, 2, 56) , fontWeight: FontWeight.bold),),
       ),
       body: (headlines.length == 0)
           ? Center(child: CircularProgressIndicator(),)

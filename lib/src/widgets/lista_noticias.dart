@@ -83,14 +83,15 @@ class _TarjetaBotonesState extends State<_TarjetaBotones> {
                 _color = !_color;
               });
             },
-            fillColor: Colors.red,
+            fillColor: Colors.black38,
             shape: RoundedRectangleBorder(
               borderRadius: BorderRadius.circular(20),
             ),
             child: Icon(
-              Icons.star,
+              Icons.star_border_purple500,
+              size: 28,
               color: _color 
-                ? Colors.black 
+                ? Color.fromARGB(255, 12, 2, 56) 
                 : Colors.yellow,
             ),
           ),
@@ -106,9 +107,10 @@ class _TarjetaBotonesState extends State<_TarjetaBotones> {
               borderRadius: BorderRadius.circular(20),
             ),
             child: Icon(
+              color: Color.fromARGB(255, 12, 2, 56), 
               Icons.link,
               size: 30,
-               
+
             ),
           ),
         ],

@@ -47,7 +47,7 @@ class _ListCategorias extends StatelessWidget {
                     height: 5,
                   ),
                   Text( (cName == 'business')
-                        ? 'Finanzas'
+                        ? 'Economía'
                         : (cName == 'entertainment')
                           ? 'Pasatiempo'
                           :(cName == 'health')
