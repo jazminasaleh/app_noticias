@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:noticias/src/pages/tab1_page.dart';
 import 'package:noticias/src/pages/tab2_page.dart';
 import 'package:noticias/src/services/news_service.dart';
+import 'package:noticias/src/theme/tema.dart';
 import 'package:provider/provider.dart';
 import 'package:provider/provider.dart';
 
@@ -32,15 +33,15 @@ class _Navegacion extends StatelessWidget {
       currentIndex: navegacionModel.paginaActual,
       //aca se cambia el valor de la pagina actual
       onTap: (i) {
-        
         navegacionModel.paginaActual = i;
         final newsServices = Provider.of<NewsService>(context, listen: false);
         newsServices.selectedCategory = newsServices.selectedcategory;
       },
       items: const [
         BottomNavigationBarItem(
-            icon: Icon(Icons.newspaper), label: 'Noticias', ),
-        BottomNavigationBarItem(icon: Icon(Icons.public), label: 'Categoria')
+            icon: Icon(Icons.newspaper, ), 
+            label: 'Noticias',),
+        BottomNavigationBarItem(icon: Icon(Icons.public), label: 'Categorías')
       ],
     );
   }

@@ -1,8 +1,9 @@
 import 'package:flutter/material.dart';
 import 'package:noticias/src/models/news_models.dart';
 import 'package:noticias/src/theme/tema.dart';
+import 'package:url_launcher/url_launcher.dart';
 
-//la lista de las noticias
+//la lista de las noticias con todos sus datos
 class ListaNoticias extends StatelessWidget {
   final List<Article> noticias;
 
@@ -42,7 +43,13 @@ class _Noticia extends StatelessWidget {
           noticia: this.noticia,
           index: this.index,
         ),
-        _TarjetaBotones(),
+        _TarjetaAutor(
+          noticia: this.noticia,
+        ),
+        _TarjetaFecha(
+          noticia: noticia,
+        ),
+        _TarjetaBotones(noticia: noticia),
         SizedBox(
           height: 5,
         ),
@@ -51,8 +58,19 @@ class _Noticia extends StatelessWidget {
     );
   }
 }
+//Los botones de estrella y que manda al enlace de la noticia
+class _TarjetaBotones extends StatefulWidget {
+  final Article noticia;
 
-class _TarjetaBotones extends StatelessWidget {
+  _TarjetaBotones({required this.noticia});
+
+  @override
+  State<_TarjetaBotones> createState() => _TarjetaBotonesState();
+}
+
+class _TarjetaBotonesState extends State<_TarjetaBotones> {
+  bool _color = true;
+
   @override
   Widget build(BuildContext context) {
     return Container(
@@ -60,23 +78,38 @@ class _TarjetaBotones extends StatelessWidget {
         mainAxisAlignment: MainAxisAlignment.center,
         children: [
           RawMaterialButton(
-            onPressed: () {},
-            fillColor: miTema.accentColor,
+            onPressed: () {
+              setState(() {
+                _color = !_color;
+              });
+            },
+            fillColor: Colors.red,
             shape: RoundedRectangleBorder(
               borderRadius: BorderRadius.circular(20),
             ),
-            child: Icon(Icons.star_border),
+            child: Icon(
+              Icons.star,
+              color: _color 
+                ? Colors.black 
+                : Colors.yellow,
+            ),
           ),
           SizedBox(
             width: 10,
           ),
           RawMaterialButton(
-            onPressed: () {},
+            onPressed: () {
+              launch(widget.noticia.url);
+            },
             fillColor: Colors.blue,
             shape: RoundedRectangleBorder(
               borderRadius: BorderRadius.circular(20),
             ),
-            child: Icon(Icons.more),
+            child: Icon(
+              Icons.link,
+              size: 30,
+               
+            ),
           ),
         ],
       ),
@@ -84,6 +117,7 @@ class _TarjetaBotones extends StatelessWidget {
   }
 }
 
+//Una breve descripcion de la notica
 class _TarjetaBody extends StatelessWidget {
   final Article noticia;
   const _TarjetaBody({required this.noticia});
@@ -97,6 +131,7 @@ class _TarjetaBody extends StatelessWidget {
   }
 }
 
+//Iamgen de la noticia
 class _TarjetaImagen extends StatelessWidget {
   final Article noticia;
   const _TarjetaImagen({required this.noticia});
@@ -105,8 +140,8 @@ class _TarjetaImagen extends StatelessWidget {
   Widget build(BuildContext context) {
     print(noticia.urlToImage);
     return Container(
-        margin: EdgeInsets.symmetric(vertical: 10, horizontal: 10),
-        child: ClipRRect(
+      margin: EdgeInsets.symmetric(vertical: 10, horizontal: 10),
+      child: ClipRRect(
           borderRadius: BorderRadius.only(
               topLeft: Radius.circular(50), bottomRight: Radius.circular(50)),
           child: Container(
@@ -114,13 +149,11 @@ class _TarjetaImagen extends StatelessWidget {
                   ? Image(image: NetworkImage(noticia.urlToImage!))
                   : Image(
                       image: AssetImage('assets/no-image.png'),
-                    )
-                )
-              ),
-        );
+                    ))),
+    );
   }
 }
-
+//Titulo de la noticia
 class _TarjetaTitulo extends StatelessWidget {
   final Article noticia;
 
@@ -137,7 +170,7 @@ class _TarjetaTitulo extends StatelessWidget {
     );
   }
 }
-
+//Qu periodico publico la noticia
 class _TarjetaTopBar extends StatelessWidget {
   final Article noticia;
   final int index;
@@ -151,7 +184,6 @@ class _TarjetaTopBar extends StatelessWidget {
   Widget build(BuildContext context) {
     return Container(
       margin: EdgeInsets.symmetric(vertical: 10, horizontal: 10),
-     
       child: Row(
         children: [
           Text('Fuente: '),
@@ -163,3 +195,56 @@ class _TarjetaTopBar extends StatelessWidget {
     );
   }
 }
+
+//Autor de la noticia
+class _TarjetaAutor extends StatelessWidget {
+  final Article noticia;
+
+  const _TarjetaAutor({
+    required this.noticia,
+  });
+
+  @override
+  Widget build(BuildContext context) {
+    return Container(
+      margin: EdgeInsets.only(left: 10, bottom: 10),
+      child: Row(
+        children: [
+          Text('Autor: '),
+          (noticia.author != '')
+              ? Text(
+                  '${noticia.author}.',
+                )
+              : Text('No se conoce al autor.')
+        ],
+      ),
+    );
+  }
+}
+//Feacha y hora en la que fue publicada la noticia
+class _TarjetaFecha extends StatelessWidget {
+  final Article noticia;
+
+  const _TarjetaFecha({
+    required this.noticia,
+  });
+
+  @override
+  Widget build(BuildContext context) {
+    return Container(
+      margin: EdgeInsets.only(left: 10, bottom: 10),
+      child: Row(
+        children: [
+          Text('Fecha y hora: '),
+          (noticia.publishedAt != '')
+              ? Text(
+                  '${noticia.publishedAt}.',
+                )
+              : Text('No tiene URL.')
+        ],
+      ),
+    );
+  }
+}
+
+

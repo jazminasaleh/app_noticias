@@ -46,7 +46,19 @@ class _ListCategorias extends StatelessWidget {
                   SizedBox(
                     height: 5,
                   ),
-                  Text('${cName[0].toUpperCase()}${cName.substring(1)}')
+                  Text( (cName == 'business')
+                        ? 'Finanzas'
+                        : (cName == 'entertainment')
+                          ? 'Pasatiempo'
+                          :(cName == 'health')
+                            ? 'Salud'
+                            :(cName == 'science')
+                              ? 'Ciencia'
+                              :(cName == 'sports')
+                                ? 'Deportes'
+                                :(cName == 'technology')
+                                  ? 'Tecnología'
+                                  : '${cName[0].toUpperCase()}${cName.substring(1)}')
                 ],
               ),
             ),
@@ -77,7 +89,7 @@ class _CategoryButtom extends StatelessWidget {
         decoration: BoxDecoration(shape: BoxShape.circle, color: Colors.white),
         child: Icon(categoria.icon,
             color: (newService.selectedcategory == this.categoria.name)
-                ? miTema.accentColor
+                ? Colors.blue
                 : Colors.black54),
       ),
     );
