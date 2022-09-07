@@ -14,8 +14,8 @@ class _Tab1PageState extends State<Tab1Page> with AutomaticKeepAliveClientMixin{
     final headlines = Provider.of<NewsService>(context).headlines;
     return Scaffold(
       appBar: AppBar(
-       
-        title: Text('Noticias generales de Colombia ', style: TextStyle(color: Color.fromARGB(255, 248, 233, 182)),),
+        backgroundColor: Colors.white,
+        title: Text('       Noticias generales de Colombia ', style: TextStyle(color: Color.fromARGB(255, 12, 2, 53), fontWeight: FontWeight.bold),),
       ),
       body: (headlines.length == 0)
           ? Center(child: CircularProgressIndicator(),)

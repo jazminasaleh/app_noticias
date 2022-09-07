@@ -32,13 +32,14 @@ class _Navegacion extends StatelessWidget {
       currentIndex: navegacionModel.paginaActual,
       //aca se cambia el valor de la pagina actual
       onTap: (i) {
+        
         navegacionModel.paginaActual = i;
         final newsServices = Provider.of<NewsService>(context, listen: false);
         newsServices.selectedCategory = newsServices.selectedcategory;
       },
       items: const [
         BottomNavigationBarItem(
-            icon: Icon(Icons.newspaper), label: 'Noticias'),
+            icon: Icon(Icons.newspaper), label: 'Noticias', ),
         BottomNavigationBarItem(icon: Icon(Icons.public), label: 'Categoria')
       ],
     );

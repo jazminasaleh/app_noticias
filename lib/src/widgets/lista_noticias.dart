@@ -91,6 +91,7 @@ class _TarjetaBody extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Container(
+      margin: EdgeInsets.symmetric(horizontal: 10),
       child: Text(noticia.description ?? ''),
     );
   }
@@ -104,7 +105,7 @@ class _TarjetaImagen extends StatelessWidget {
   Widget build(BuildContext context) {
     print(noticia.urlToImage);
     return Container(
-        margin: EdgeInsets.symmetric(vertical: 10),
+        margin: EdgeInsets.symmetric(vertical: 10, horizontal: 10),
         child: ClipRRect(
           borderRadius: BorderRadius.only(
               topLeft: Radius.circular(50), bottomRight: Radius.circular(50)),
@@ -149,7 +150,8 @@ class _TarjetaTopBar extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Container(
-      margin: EdgeInsets.only(bottom: 10),
+      margin: EdgeInsets.symmetric(vertical: 10, horizontal: 10),
+     
       child: Row(
         children: [
           Text('Fuente: '),
